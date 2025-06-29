@@ -1,0 +1,17 @@
+using System;
+
+public class MyProgram
+{
+    static void Main(string[] args) {
+        int a, b; // Solo declaración de dos variables enteras
+        int c = 20, d = 12; // Declaración de dos variables enteras con asignación
+        float precio, altura; // Declaración de dos variables decimales de tipo float
+
+        precio = 42.99;
+        string profesora;
+        profesora = "Asuncion Mariana Sic Sor";
+        bool visible = false; // Tipo Boolean
+        char letra1; // Declaración de variable de tipo char
+        letra1 = 'h'; // Tipo carácter (entre comillas simples)
+    }
+}

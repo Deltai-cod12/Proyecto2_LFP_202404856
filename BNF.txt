@@ -1,0 +1,91 @@
+<programa> ::= <using_statement>? <declaracion_clase>
+
+<using_statement> ::= "using" "System" ";"
+
+<declaracion_clase> ::= "public" "class" <identificador> "{" <declaracion_metodo> "}"
+
+<declaracion_metodo> ::= "static" "void" "Main" "(" "string" "[" "]" <identificador> ")" "{" <lista_declaraciones> "}"
+
+<lista_declaraciones> ::= <declaracion> | <lista_declaraciones> <declaracion>
+
+<declaracion> ::= <declaracion_variable> ";"
+                | <asignacion_variable> ";"
+                | <declaracion_impresion> ";"
+                | <declaracion_if>
+                | <declaracion_for>
+                | <comentario>
+
+<declaracion_variable> ::= <tipo> <identificador> ("," <identificador>)*
+                         | <tipo> <identificador> "=" <expresion> ("," <identificador> "=" <expresion>)*
+
+<tipo> ::= "int" | "float" | "char" | "string" | "bool"
+
+<asignacion_variable> ::= <identificador> "=" <expresion>
+
+<expresion> ::= <expresion_simple>
+              | <expresion_simple> <operador_relacional> <expresion_simple>
+
+<expresion_simple> ::= <termino> (<operador_aditivo> <termino>)*
+
+<termino> ::= <factor> (<operador_multiplicativo> <factor>)*
+
+<factor> ::= <numero>
+           | <cadena_literal>
+           | <caracter_literal>
+           | <booleano_literal>
+           | <identificador>
+           | "(" <expresion> ")"
+           | <concatenacion>
+
+<concatenacion> ::= <cadena_literal> "+" <expresion>
+                  | <expresion> "+" <cadena_literal>
+                  | <concatenacion> "+" <expresion>
+
+<operador_relacional> ::= "==" | "!=" | "<" | ">" | "<=" | ">="
+
+<operador_aditivo> ::= "+" | "-"
+
+<operador_multiplicativo> ::= "*" | "/"
+
+<declaracion_impresion> ::= "Console" "." "WriteLine" "(" <argumento_impresion>? ")"
+                          | "Console" "." "WriteLine" "(" <concatenacion> ")"
+
+<argumento_impresion> ::= <expresion> | <cadena_literal>
+
+<declaracion_if> ::= "if" "(" <expresion> ")" "{" <lista_declaraciones> "}"
+                   | "if" "(" <expresion> ")" "{" <lista_declaraciones> "}" "else" "{" <lista_declaraciones> "}"
+
+<declaracion_for> ::= "for" "(" (<declaracion_variable> | <asignacion_variable>) ";" <expresion> ";" (<incremento> | <decremento>) ")" "{" <lista_declaraciones> "}"
+
+<incremento> ::= <identificador> "++"
+
+<decremento> ::= <identificador> "--"
+
+<comentario> ::= "//" <texto_comentario> "\n"
+               | "/*" <bloque_comentario> "*/"
+
+<identificador> ::= <letra> (<letra> | <digito> | "_")*
+
+<numero> ::= <entero> | <decimal>
+
+<entero> ::= <digito>+
+
+<decimal> ::= <digito>+ "." <digito>+
+
+<cadena_literal> ::= '"' <contenido_cadena> '"'
+
+<caracter_literal> ::= "'" <caracter> "'"
+
+<booleano_literal> ::= "true" | "false"
+
+<letra> ::= "a".."z" | "A".."Z"
+
+<digito> ::= "0".."9"
+
+<caracter> ::= # Cualquier carácter imprimible excepto comilla simple
+
+<contenido_cadena> ::= # Cualquier secuencia de caracteres excepto comilla doble
+
+<texto_comentario> ::= # Cualquier secuencia de caracteres hasta fin de línea
+
+<bloque_comentario> ::= # Cualquier secuencia de caracteres hasta encontrar */
