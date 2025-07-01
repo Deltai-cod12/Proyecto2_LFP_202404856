@@ -1,61 +1,77 @@
-enum Type {
-    // Tipos básicos
-    UNKNOWN,
-    IDENTIFIER,     // Variables, nombres de funciones, etc.
-    NUMBER,         // Números enteros y decimales
-    STRING,         // Cadenas entre comillas
-    BOOLEAN,        // true o false
-    CHAR,           // Caracteres entre comillas simples
-    
-    // Símbolos y operadores
-    PAR_OPEN,       // (
-    PAR_CLOSE,      // )
-    SEMICOLON,      // ;
-    COLON,          // :
-    BRACKET_OPEN,   // [
-    BRACKET_CLOSE,  // ]
-    BRACE_OPEN,     // {
-    BRACE_CLOSE,    // }
-    COMMA,          // ,
-    DOT,            // .
-    ASSIGN,         // =
-    
-    // Operadores aritméticos
-    PLUS,           // +
-    MINUS,          // -
-    MULTIPLY,       // *
-    DIVIDE,         // /
-    
-    // Operadores relacionales
-    EQUAL,          // ==
-    NOT_EQUAL,      // !=
-    LESS,           // <
-    GREATER,        // >
-    LESS_EQUAL,     // <=
-    GREATER_EQUAL,  // >=
-    
-    // Palabras reservadas de C#
-    RESERVED_WORD,
+export enum Type {
     UNKNOW,
-    
-    // Comentarios
-    LINE_COMMENT,   // //
-    BLOCK_COMMENT   // /* */
+    KEY_O,
+    KEY_C,
+    BRA_O,
+    BRA_C,
+    PAR_O,
+    PAR_C,
+    SEMICOLON,
+    COMMA,
+    PERIOD,
+    ASSIGN,
+    PLUS,
+    MINUS,
+    MULT,
+    DIV,
+    INC,
+    DEC,
+    EQUAL,
+    DIFF,
+    LESS,
+    GREATER,
+    LESS_EQ,
+    GREATER_EQ,
+    IDENTIFIER,
+    INTEGER,
+    DECIMAL,
+    COMMENT,
+    MULTICOMMENT,
+    STRING,
+    CHAR,
+    R_USING,
+    R_SYSTEM,
+    R_PUBLIC,
+    R_CLASS,
+    R_STATIC,
+    R_VOID,
+    R_MAIN,
+    R_STRING,
+    R_INT,
+    R_FLOAT,
+    R_CHAR,
+    R_BOOL,
+    R_FALSE,
+    R_TRUE,
+    R_CONSOLE,
+    R_WRITELINE,
+    R_IF,
+    R_ELSE,
+    R_FOR
 }
 
-class Token {
+export class Token {
+
+    private typeTokenString: string;
+    private typeToken: Type;
+    private lexeme: string;
     private row: number;
     private column: number;
-    private lexeme: string;
-    private typeToken: Type;
-    private typeTokenString: string;
 
     constructor(typeToken: Type, lexeme: string, row: number, column: number) {
-        this.typeToken = typeToken;
         this.typeTokenString = Type[typeToken];
+        this.typeToken = typeToken;
         this.lexeme = lexeme;
         this.row = row;
         this.column = column;
+    }
+
+    getType(): Type {
+        return this.typeToken;
+    }
+
+    getLexeme(): string {
+        return this.lexeme;
     }
 
     getRow(): number {
@@ -66,21 +82,7 @@ class Token {
         return this.column;
     }
 
-    getLexeme(): string {
-        return this.lexeme;
-    }
-
-    getType(): Type {
-        return this.typeToken;
-    }
-
     getTypeTokenString(): string {
         return this.typeTokenString;
     }
-
-    toString(): string {
-        return `Token [${this.typeTokenString}] '${this.lexeme}' at (${this.row}, ${this.column})`;
-    }
 }
-
-export { Token, Type };
